@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { sliderItems } from "../data";
+import { mobile, tablet } from "../responsive";
 
 const Container = styled.div`
   width: 100%;
@@ -46,10 +47,11 @@ const Slide = styled.div`
 const ImgContainer = styled.div`
   flex: 1;
   height: 100%;
+  ${tablet({ display: "none" })}
 `;
 
 const Image = styled.img`
-  height: 80%;
+  height: 100%;
   width: 100%;
   object-fit: contain;
 `;

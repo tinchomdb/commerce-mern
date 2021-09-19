@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Nav from "../components/Nav";
 import Newsletter from "../components/Newsletter";
 import Products from "../components/Products";
+import { tablet } from "../responsive";
 
 const Container = styled.div``;
 
@@ -19,17 +20,27 @@ const FilterContainer = styled.div`
 
 const Filter = styled.div`
   margin: 20px;
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
 `;
 
 const FilterText = styled.span`
   font-size: 20px;
   font-weight: 600;
   margin-right: 20px;
+  margin-bottom: 5px;
+  ${tablet({ width: "100%" })}
 `;
 
 const Select = styled.select`
   padding: 10px;
   margin-right: 20px;
+  max-height: 38px;
+  background-color: white;
+  border: 1px solid black;
+  margin-bottom: 5px;
+  /* outline: none; */
 `;
 
 const Option = styled.option``;

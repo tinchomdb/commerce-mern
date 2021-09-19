@@ -1,16 +1,19 @@
 import React from "react";
 import styled from "styled-components";
+import { mobile, tablet } from "../responsive";
 
 const Container = styled.div`
   flex: 1;
   margin: 3px;
   height: 70vh;
   position: relative;
+  ${mobile({ margin: "3px 0px" })}
 `;
 const Image = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  ${mobile({ height: "30vh", objectPosition: "50% 20%" })}
 `;
 const Info = styled.div`
   position: absolute;
@@ -26,6 +29,7 @@ const Info = styled.div`
 const Title = styled.h1`
   color: white;
   margin-bottom: 20px;
+  text-align: center;
 `;
 const Button = styled.button`
   border: none;

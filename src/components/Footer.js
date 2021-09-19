@@ -9,9 +9,12 @@ import {
 } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
+import { mobile, tablet } from "../responsive";
 
 const Container = styled.div`
   display: flex;
+  ${tablet({ flexDirection: "column" })}
+  ${tablet({ fontSize: "14px" })}
 `;
 
 const Left = styled.div`
@@ -24,6 +27,7 @@ const Left = styled.div`
 const Center = styled.div`
   flex: 1;
   padding: 20px;
+  ${mobile({ display: "none" })}
 `;
 
 const Title = styled.h3`
@@ -42,6 +46,7 @@ const List = styled.ul`
 const ListItem = styled.li`
   width: 50%;
   margin-bottom: 10px;
+  ${tablet({ width: "100%" })}
 `;
 
 const Logo = styled.h1``;
@@ -68,6 +73,7 @@ const SocialIcon = styled.div`
 const Right = styled.div`
   flex: 1;
   padding: 20px;
+  ${mobile({ backgroundColor: "#eee" })}
 `;
 
 const ContactItem = styled.div`

@@ -11,13 +11,16 @@ const Container = styled.div`
   flex-direction: column;
 `;
 const Title = styled.h1`
-  font-size: 70px;
   margin-bottom: 20px;
+  text-align: center;
+  font-size: clamp(3rem, -0.875rem + 8.333vw, 70px);
 `;
 const Desc = styled.div`
   font-size: 24px;
   font-weight: 300;
   margin-bottom: 20px;
+  text-align: center;
+  font-size: clamp(16px, -0.875rem + 4vw, 24px);
 `;
 const InputContainer = styled.div`
   width: 50%;

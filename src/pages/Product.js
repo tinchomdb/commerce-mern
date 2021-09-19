@@ -1,15 +1,18 @@
+import { Add, Remove } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Nav from "../components/Nav";
 import Newsletter from "../components/Newsletter";
+import { tablet } from "../responsive";
 
 const Container = styled.div``;
 
 const Wrapper = styled.div`
   padding: 50px;
   display: flex;
+  ${tablet({ flexDirection: "column", padding: "0px" })}
 `;
 
 const ImgContainer = styled.div`
@@ -18,13 +21,15 @@ const ImgContainer = styled.div`
 const Image = styled.img`
   width: 100%;
   height: 90vh;
-  min-width: 400px;
+  ${tablet({ height: "40vh" })}
+  min-width: 240px;
   object-fit: contain;
   object-position: top;
 `;
 const InfoContainer = styled.div`
   flex: 1;
-  padding: 0px 50px;
+  padding: 10px 50px;
+  ${tablet({ padding: " 10px 20px" })}
 `;
 const Title = styled.h1`
   font-weight: 200;
@@ -64,12 +69,46 @@ const FilterSize = styled.select`
   padding: 5px;
 `;
 const FilterSizeOption = styled.option``;
+const AddContainer = styled.div`
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+const AmountContainer = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+`;
+const Amount = styled.span`
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid teal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 5px;
+`;
+const Button = styled.button`
+  padding: 15px;
+  border: 2px solid teal;
+  background-color: white;
+  cursor: pointer;
+  font-weight: 500;
+  max-height: 50px;
+  min-width: 115px;
+
+  &:hover {
+    background-color: #f8f4f4;
+  }
+`;
 
 function Product() {
   return (
     <Container>
       <Announcement />
-      <Wrapper></Wrapper>
+
       <Nav />
       <Wrapper>
         <ImgContainer>
@@ -106,6 +145,14 @@ function Product() {
               </FilterSize>
             </Filter>
           </FilterContainer>
+          <AddContainer>
+            <AmountContainer>
+              <Remove />
+              <Amount>1</Amount>
+              <Add />
+            </AmountContainer>
+            <Button>ADD TO CART</Button>
+          </AddContainer>
         </InfoContainer>
       </Wrapper>
       <Newsletter />
