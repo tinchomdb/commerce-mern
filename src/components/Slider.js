@@ -8,9 +8,7 @@ import { mobile, tablet } from "../responsive";
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
-  display: flex;
-  position: relative;
+  height: 400px;
 `;
 
 /* const Arrow = styled.div`
@@ -31,16 +29,11 @@ const Container = styled.div`
   opacity: 0.5;
 `; */
 
-const Wrapper = styled.div`
-  height: 100%;
-  width: 100%;
-`;
-
 const Slide = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: 400px;
   background-color: #${(props) => props.bg};
 `;
 
@@ -84,31 +77,31 @@ function Slider() {
       {/* <Arrow direction="left">
         <ArrowLeftOutlined />
       </Arrow> */}
-      <Wrapper>
-        <Carousel
-          autoPlay
-          infiniteLoop
-          showStatus={false}
-          showIndicators={false}
-          showThumbs={false}
-          interval={5000}
-          emulateTouch
-          useKeyboardArrows
-        >
-          {sliderItems.map((item) => (
-            <Slide bg={item.bg}>
-              <ImgContainer>
-                <Image src={item.img} alt="" />
-              </ImgContainer>
-              <InfoContainer>
-                <Title>{item.title}</Title>
-                <Desc>{item.desc}</Desc>
-                <Button>SHOW NOW</Button>
-              </InfoContainer>
-            </Slide>
-          ))}
-        </Carousel>
-      </Wrapper>
+
+      <Carousel
+        autoPlay
+        infiniteLoop
+        showStatus={false}
+        showIndicators={false}
+        showThumbs={false}
+        interval={5000}
+        emulateTouch
+        useKeyboardArrows
+      >
+        {sliderItems.map((item) => (
+          <Slide bg={item.bg}>
+            <ImgContainer>
+              <Image src={item.img} alt="" />
+            </ImgContainer>
+            <InfoContainer>
+              <Title>{item.title}</Title>
+              <Desc>{item.desc}</Desc>
+              <Button>SHOW NOW</Button>
+            </InfoContainer>
+          </Slide>
+        ))}
+      </Carousel>
+
       {/* <Arrow direction="right">
         <ArrowRightOutlined />
       </Arrow> */}
