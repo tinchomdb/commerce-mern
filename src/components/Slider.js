@@ -1,10 +1,9 @@
-import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
 import React from "react";
 import styled from "styled-components";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { sliderItems } from "../data";
-import { mobile, tablet } from "../responsive";
+import { tablet } from "../responsive";
 
 const Container = styled.div`
   width: 100%;
@@ -89,7 +88,7 @@ function Slider() {
         useKeyboardArrows
       >
         {sliderItems.map((item) => (
-          <Slide bg={item.bg}>
+          <Slide bg={item.bg} key={item.id}>
             <ImgContainer>
               <Image src={item.img} alt="" />
             </ImgContainer>

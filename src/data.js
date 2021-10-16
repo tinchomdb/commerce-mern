@@ -20,17 +20,20 @@ export const categories = [
     id: 1,
     img: "https://i.imgur.com/7QQC31m.jpg",
     title: "AUTUMN SALE",
+    cat: "winter",
   },
   {
     id: 2,
     img: "https://i.imgur.com/KZPrjpB.jpg",
     title: "SUMMER SALE",
+    cat: "summer",
   },
   ,
   {
     id: 3,
     img: "https://i.imgur.com/3HNPXqG.jpg",
     title: "WINTER SALE",
+    cat: "winter",
   },
 ];
 

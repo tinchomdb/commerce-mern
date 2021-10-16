@@ -1,5 +1,7 @@
 import { Add, Remove } from "@material-ui/icons";
-import React from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
@@ -63,6 +65,7 @@ const FilterColor = styled.div`
   background-color: ${(props) => props.color};
   margin: 0px 5px;
   cursor: pointer;
+  border: 1px solid black;
 `;
 const FilterSize = styled.select`
   margin-left: 10px;
@@ -105,56 +108,82 @@ const Button = styled.button`
 `;
 
 function Product() {
+  const location = useLocation();
+  const id = location.pathname.split("/")[2];
+  const [product, setProduct] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+  const [color, setColor] = useState(null);
+  const [size, setSize] = useState(null);
+
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:5000/api/products/find/${id}`
+        );
+        setProduct(res.data);
+        console.log(res.data);
+      } catch (err) {}
+    };
+    getProduct();
+  }, [id]);
+
+  const handleQuantity = (type) => {
+    if (type === "dec") {
+      if (quantity > 1) setQuantity(quantity - 1);
+    } else if (type === "inc") {
+      setQuantity(quantity + 1);
+    }
+  };
+
   return (
     <Container>
       <Announcement />
 
       <Nav />
-      <Wrapper>
-        <ImgContainer>
-          <Image
-            src="https://www.bolf.eu/eng_pl_Mens-Leather-Jacket-Black-Bolf-1107-75137_2.jpg"
-            alt=""
-          />
-        </ImgContainer>
-        <InfoContainer>
-          <Title>Denim Jumpsuit</Title>
-          <Desc>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it
-          </Desc>
-          <Price>$ 200</Price>
-          <FilterContainer>
-            <Filter>
-              <FilterTitle>Color</FilterTitle>
-              <FilterColor color="black"></FilterColor>
-              <FilterColor color="darkblue"></FilterColor>
-              <FilterColor color="gray"></FilterColor>
-            </Filter>
-            <Filter>
-              <FilterTitle>Size</FilterTitle>
+      {product ? (
+        <Wrapper>
+          <ImgContainer>
+            <Image src={product.img} alt="" />
+          </ImgContainer>
+          <InfoContainer>
+            <Title>{product.title}</Title>
+            <Desc>{product.description}</Desc>
+            <Price>$ {product.price}</Price>
+            <FilterContainer>
+              <Filter>
+                <FilterTitle>Color</FilterTitle>
+                {product.color.map((c) => (
+                  <FilterColor
+                    color={c}
+                    key={c}
+                    onClick={() => setColor(c)}
+                  ></FilterColor>
+                ))}
+              </Filter>
+              <Filter>
+                <FilterTitle>Size</FilterTitle>
+                <FilterSize onChange={(e) => setSize(e.target.value)}>
+                  {product.size.map((s) => (
+                    <FilterSizeOption>{s}</FilterSizeOption>
+                  ))}
+                </FilterSize>
+              </Filter>
+            </FilterContainer>
+            <AddContainer>
+              <AmountContainer>
+                <Remove onClick={() => handleQuantity("dec")} />
+                <Amount>{quantity}</Amount>
+                <Add onClick={() => handleQuantity("inc")} />
+              </AmountContainer>
+              <Button>ADD TO CART</Button>
+            </AddContainer>
+          </InfoContainer>
+        </Wrapper>
+      ) : (
+        ""
+      )}
 
-              <FilterSize>
-                <FilterSizeOption>XS</FilterSizeOption>
-                <FilterSizeOption>S</FilterSizeOption>
-                <FilterSizeOption>M</FilterSizeOption>
-                <FilterSizeOption>L</FilterSizeOption>
-                <FilterSizeOption>XL</FilterSizeOption>
-              </FilterSize>
-            </Filter>
-          </FilterContainer>
-          <AddContainer>
-            <AmountContainer>
-              <Remove />
-              <Amount>1</Amount>
-              <Add />
-            </AmountContainer>
-            <Button>ADD TO CART</Button>
-          </AddContainer>
-        </InfoContainer>
-      </Wrapper>
       <Newsletter />
       <Footer />
     </Container>
