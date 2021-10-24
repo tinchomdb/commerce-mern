@@ -7,7 +7,9 @@ import Announcement from "../components/Announcement";
 import Footer from "../components/Footer";
 import Nav from "../components/Nav";
 import Newsletter from "../components/Newsletter";
+import { addProduct } from "../redux/cartRedux";
 import { tablet } from "../responsive";
+import { useDispatch } from "react-redux";
 
 const Container = styled.div``;
 
@@ -114,6 +116,7 @@ function Product() {
   const [quantity, setQuantity] = useState(1);
   const [color, setColor] = useState(null);
   const [size, setSize] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getProduct = async () => {
@@ -134,6 +137,17 @@ function Product() {
     } else if (type === "inc") {
       setQuantity(quantity + 1);
     }
+  };
+
+  const handleAddToCart = () => {
+    dispatch(
+      addProduct({
+        ...product,
+        quantity,
+        color,
+        size,
+      })
+    );
   };
 
   return (
@@ -176,7 +190,7 @@ function Product() {
                 <Amount>{quantity}</Amount>
                 <Add onClick={() => handleQuantity("inc")} />
               </AmountContainer>
-              <Button>ADD TO CART</Button>
+              <Button onClick={() => handleAddToCart()}>ADD TO CART</Button>
             </AddContainer>
           </InfoContainer>
         </Wrapper>
